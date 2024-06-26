@@ -1,8 +1,10 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
+const dotenv = require('dotenv');
 const attendanceRoutes = require('./routes/attendanceRoutes');
 const loggerMiddleware = require('./middlewares/loggerMiddleware');
+dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
