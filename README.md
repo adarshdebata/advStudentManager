@@ -72,7 +72,7 @@ advStudentManager/
 #### Student Management
 
 - **Add Student**
-    - **Endpoint:** `POST /api/students`
+    - **Endpoint:** `POST /students`
     - **Request Body:**
         ```json
         {
@@ -87,7 +87,7 @@ advStudentManager/
         ```
 
 - **Get Student**
-    - **Endpoint:** `GET /api/students/:student_id`
+    - **Endpoint:** `GET /students/:student_id`
     - **Response:**
         ```json
         {
@@ -97,7 +97,7 @@ advStudentManager/
         ```
 
 - **Get All Students**
-    - **Endpoint:** `GET /api/students`
+    - **Endpoint:** `GET /students`
     - **Response:**
         ```json
         [
@@ -105,12 +105,11 @@ advStudentManager/
                 "rollno": 1,
                 "name": "John Doe"
             },
-            ...
         ]
         ```
 
 - **Update Student**
-    - **Endpoint:** `PUT /api/students/:student_id`
+    - **Endpoint:** `PUT /students/:student_id`
     - **Request Body:**
         ```json
         {
@@ -125,7 +124,7 @@ advStudentManager/
         ```
 
 - **Delete Student**
-    - **Endpoint:** `DELETE /api/students/:student_id`
+    - **Endpoint:** `DELETE /students/:student_id`
     - **Response:**
         ```json
         {
@@ -136,7 +135,7 @@ advStudentManager/
 #### Attendance Management
 
 - **Add Attendance**
-    - **Endpoint:** `POST /api/attendance`
+    - **Endpoint:** `POST /attendance`
     - **Request Body:**
         ```json
         {
@@ -153,7 +152,7 @@ advStudentManager/
         ```
 
 - **Get Present Time for a Month**
-    - **Endpoint:** `GET /api/attendance/:rollno?month=6`
+    - **Endpoint:** `GET /attendance/:rollno?month=6`
     - **Response:**
         ```json
         {
@@ -168,7 +167,7 @@ advStudentManager/
 #### Fees Management
 
 - **Enroll Student in a Course**
-    - **Endpoint:** `POST /api/fees/enroll`
+    - **Endpoint:** `POST /fees/enroll`
     - **Request Body:**
         ```json
         {
@@ -185,7 +184,7 @@ advStudentManager/
         ```
 
 - **Get All Fees Structure**
-    - **Endpoint:** `GET /api/fees`
+    - **Endpoint:** `GET /fees`
     - **Response:**
         ```json
         [
@@ -198,7 +197,7 @@ advStudentManager/
         ```
 
 - **Update Payment Status**
-    - **Endpoint:** `PUT /api/fees/payment`
+    - **Endpoint:** `PUT /fees/payment`
     - **Request Body:**
         ```json
         {
