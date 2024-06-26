@@ -23,8 +23,8 @@ const getPresentTimeForMonth = async (rollno, month) => {
     const result = await pool.query(query, [rollno, month]);
 
     return result.rows.map(row => ({
-        date: row.date.toISOString().split('T')[0], // Format date as YYYY-MM-DD
-        total_present_hours: parseFloat(row.total_present_hours).toFixed(2) // Round to 2 decimal places
+        date: row.date.toISOString().split('T')[0], 
+        total_present_hours: parseFloat(row.total_present_hours).toFixed(2) 
     }));
 };
 
