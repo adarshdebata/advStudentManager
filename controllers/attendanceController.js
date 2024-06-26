@@ -1,5 +1,6 @@
 const attendanceService = require('../services/attendanceService');
 
+// API to add attendance
 const addAttendance = async (req, res) => {
     const { rollno, entry_time, exit_time } = req.body;
     try {
@@ -11,12 +12,13 @@ const addAttendance = async (req, res) => {
     }
 };
 
+// API to fetch attendance records for a particular month
 const getPresentTimeForMonth = async (req, res) => {
     const { rollno } = req.params;
-    const { month } = req.query;
+    const { month, limit = 10, offset = 0 } = req.query;
 
     try {
-        const presentTimePerDay = await attendanceService.getPresentTimeForMonth(rollno, month);
+        const presentTimePerDay = await attendanceService.getPresentTimeForMonth(rollno, month, parseInt(limit), parseInt(offset));
         res.json({ present_time_per_day: presentTimePerDay });
     } catch (error) {
         console.error('Error fetching present time:', error);
@@ -24,7 +26,22 @@ const getPresentTimeForMonth = async (req, res) => {
     }
 };
 
+// API to fetch attendance records for a date range for a particular roll number
+const getAttendanceByDateRange = async (req, res) => {
+    const { rollno } = req.params;
+    const { start_date, end_date, limit = 10, offset = 0 } = req.query;
+
+    try {
+        const attendanceData = await attendanceService.getAttendanceByDateRange(rollno, start_date, end_date, parseInt(limit), parseInt(offset));
+        res.json({ attendance_data: attendanceData });
+    } catch (error) {
+        console.error('Error fetching attendance data by date range:', error);
+        res.status(500).json({ error: 'Failed to fetch attendance data' });
+    }
+};
+
 module.exports = {
     addAttendance,
-    getPresentTimeForMonth
+    getPresentTimeForMonth,
+    getAttendanceByDateRange
 };
