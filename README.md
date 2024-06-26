@@ -157,12 +157,10 @@ advStudentManager/
     - **Response:**
         ```json
         {
-            "present_time_per_day": [
-                {
+            "present_time_per_day": [                {
                     "date": "2024-06-01",
                     "total_present_hours": "8.00"
                 },
-                ...
             ]
         }
         ```
@@ -196,7 +194,6 @@ advStudentManager/
                 "course_id": 101,
                 "ispaid": false
             },
-            ...
         ]
         ```
 
