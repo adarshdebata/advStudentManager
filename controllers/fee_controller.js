@@ -13,29 +13,57 @@ const studentOptedCourse = async (req , res)=>{
 }
 
 
-//all courses that opted
+//all courses that opted for courses in pagination
 const getAllFeeStructure = async (req,res)=>{
-    await feeService.getAllFeeStructures()
-        .then(result =>{
-            res.status(200).json(result.rows);
-        }).catch(error =>{
-            console.log("error",error)
-            res.status(500).json({error:'Internal server error'});
-        })
-        res.status(200).json(res.rows)
+    const page = parseInt(req.query.page, 10) || 1;
+    const limit = parseInt(req.query.limit, 10) || 10;
+
+    try {
+        const { rows, total } = await feeService.getAllFeeStructures(page, limit);
+        const totalPages = Math.ceil(total / limit);
+
+        res.status(200).json({
+            data: rows,
+            pagination: {
+                total,
+                currentPage: page,
+                totalPages,
+                nextPage: page < totalPages ? page + 1 : null,
+                prevPage: page > 1 ? page - 1 : null,
+            }
+        });
+    } catch (error) {
+        console.log("error", error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
 }
 
+//particular student opted for which courses
+const studentsCourse = async (req, res) => {
+    const { rollno } = req.body;
+    const page = parseInt(req.query.page, 10) || 1;
+    const limit = parseInt(req.query.limit, 10) || 10;
 
-const studentsCourse = async(req,res)=>{
-    const {rollno} = req.body
-    await feeService.studentsCourses(rollno)
-    .then(result =>{
-        res.status(200).json(result.rows);
-    }).catch(error=>{
-        console.error("error = ",error);
-        res.status(500).json({error:'Internal server error'});
-    })
-}
+    try {
+        const { rows, total } = await feeService.studentsCourses(rollno, page, limit);
+        const totalPages = Math.ceil(total / limit);
+
+        res.status(200).json({
+            data: rows,
+            pagination: {
+                total,
+                currentPage: page,
+                totalPages,
+                nextPage: page < totalPages ? page + 1 : null,
+                prevPage: page > 1 ? page - 1 : null,
+            },
+        });
+    } catch (error) {
+        console.error("error = ", error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+};
+
 
 
 //update the status of course payment 
@@ -56,14 +84,26 @@ const changeStatus = async (req,res)=>{
 
 const courseOptedBy = async(req,res)=>{
     const courseId =req.params.id;
-    console.log(courseId);
-    await feeService.coursesOptedBy(courseId)
-    .then(result =>{
-        res.status(200).json(result.rows);
-    }).catch(error=>{
-        console.error("error = ",error);
-        res.status(500).json({error:'Internal server error'});
-    })
+    const page = parseInt(req.query.page, 10) || 1;
+    const limit = parseInt(req.query.limit, 10) || 10;
+
+    try{
+        const {rows , total}=await feeService.coursesOptedBy(courseId,page,limit);
+        const totalPages = Math.ceil(total/limit);
+        res.status(200).json({
+            data:rows,
+            pagination:{
+                total,
+                currentPage:page,
+                totalPages,
+                nextPage: page < totalPages ? page + 1 : null,
+                prevPage: page > 1 ? page - 1 : null,
+            }
+        }) 
+    }catch(error){
+        console.log("error = ",error);
+        res.status(500).json({error:'Internal server error'})
+    }
 
 }
 
