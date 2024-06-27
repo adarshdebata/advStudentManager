@@ -7,6 +7,7 @@ dotenv.config();
 // routes import -----
 const attendanceRoutes = require('./routes/attendanceRoutes.js');
 const studentRoutes = require('./routes/studentRoutes.js');
+const feesRoutes = require('./routes/fee_routes.js');
 const { isAuthenticated } = require('./middlewares/AuthMiddleware.js');
 
 const app = express();
@@ -20,6 +21,7 @@ app.use(loggerMiddleware);
 // Routes
 app.use('/', attendanceRoutes);
 app.use('/student', isAuthenticated, studentRoutes);
+app.use('/fees', feesRoutes);
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
