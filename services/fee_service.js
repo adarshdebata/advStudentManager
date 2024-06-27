@@ -1,4 +1,3 @@
-const { courseOptedBy } = require('../controllers/fee_controller.js');
 const pool = require('../models/db.js');
 
 const studentOptedCourses = async (rollno, courseId, isPaid)=>{
