@@ -31,12 +31,13 @@ CREATE TABLE course (
     course_name VARCHAR(100) NOT NULL,
     total_fees INT NOT NULL
 );
-INSERT INTO course (course_name, total_fees) VALUES
-    ('Mathematics', 5000),
-    ('Computer Science', 6000),
-    ('History', 4500),
-    ('Biology', 5500),
-    ('English Literature', 4800);
+
+-- INSERT INTO course (course_name, total_fees) VALUES
+--     ('Mathematics', 5000),
+--     ('Computer Science', 6000),
+--     ('History', 4500),
+--     ('Biology', 5500),
+--     ('English Literature', 4800);
 
 -- 
 -- Explanation:
